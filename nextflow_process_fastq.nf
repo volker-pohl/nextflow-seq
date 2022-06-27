@@ -7,8 +7,8 @@ nextflow.enable.dsl=2
 
 // dsl2 allows a process to be invoked only once in the same workflow context
 // therefore the qc process is included twice with different names via module aliasing to be invoked twice in the workflow
-include { qc as qc_initial } from './qc.nf'
-include { qc as qc_trimmed } from './qc.nf'
+// include { qc as qc_initial } from './qc.nf'
+// include { qc as qc_trimmed } from './qc.nf'
 
 process adapterTrimming {
   container 'genomicpariscentre/cutadapt'
@@ -52,8 +52,8 @@ process upload {
 
 workflow {
     input_files = Channel.fromPath("s3://081939948643-nextflow-test/data/*fastq.gz")
-    qc_initial(input_files)
+    //qc_initial(input_files)
     output_adapter_trimming = adapterTrimming(input_files)
     output_quality_trimming = qualityTrimming(output_adapter_trimming)
-    output_qc_quality_trimmed = qc_trimmed(output_quality_trimming)   
+    // output_qc_quality_trimmed = qc_trimmed(output_quality_trimming)   
 }
