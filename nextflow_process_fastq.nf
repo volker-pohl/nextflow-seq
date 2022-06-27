@@ -33,6 +33,7 @@ process qualityTrimming {
     path "SRR*"
 
   """
+  aws s3 ls s3://081939948643-nextflow-test/data/ --recursive
   prefix=\$(echo ${input_files} | awk '{print substr(\$0, 1, length(\$0) - 9)}')
   new_suffix="_trimmed.fastq.gz"
   cutadapt -q 20,20 -o \$prefix\$new_suffix ${input_files}
